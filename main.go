@@ -95,10 +95,10 @@ func newClient() (*Client, error) {
 		MaxConnsPerHost:    MaxConnsPerHost,
 	}
 	client := &http.Client{Transport: tr}
-	if *&bitbucketUrl == "" {
+	if bitbucketUrl == "" {
 		return nil, errors.New("BITBUCKET_URL env not set")
 	}
-	base, err := url.Parse(*&bitbucketUrl)
+	base, err := url.Parse(bitbucketUrl)
 	if err != nil {
 		return nil, err
 	}
@@ -115,11 +115,11 @@ func newClient() (*Client, error) {
 }
 
 func newAuth() (*auth, error) {
-	if *&OAuthbearerToken != "" {
-		return NewOAuthbearerToken(*&OAuthbearerToken), nil
+	if OAuthbearerToken != "" {
+		return NewOAuthbearerToken(OAuthbearerToken), nil
 	}
-	if *&UserName != "" && *&Password != "" {
-		return NewBasicAuth(*&UserName, *&Password), nil
+	if UserName != "" && Password != "" {
+		return NewBasicAuth(UserName, Password), nil
 	}
 	return nil, errors.New("Unable to unathenticate, Please make sure  either environmental variable BEARER_TOKEN is set or USER_NAME and  PASSWORD is set")
 
