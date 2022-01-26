@@ -9,7 +9,7 @@ pipeline {
             }
     options { buildDiscarder(logRotator(numToKeepStr: '6')) }
     environment {
-        ARTIFACTORY_URL='dsoe-docker.bin.swisscom.com'
+        ARTIFACTORY_URL='dsoe-public-docker-docker-local.bin.swisscom.com'
         IMAGE_NAME='prom-bb-licensce'
         IMAGE_TAG='1.0'
         SNYK_TOKEN=credentials('dsoe-snyk-test-sa-secrettext-token')
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image') {
             steps {
               echo 'Building docker image'
-              sh "DOCKER_BUILDKIT=1 docker build --no-cache -t ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG} ."
+              sh "docker build --no-cache -t ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
         stage('Push Image') {
