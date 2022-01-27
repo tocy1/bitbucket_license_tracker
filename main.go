@@ -30,8 +30,8 @@ var (
 	OAuthbearerToken = os.Getenv("BEARER_TOKEN")
 	UserName         = os.Getenv("USER_NAME")
 	Password         = os.Getenv("PASSWORD")
-	IdleConnTimeout  = getEnv("IDLE_CONNECTION_TIMEOUT", "30s")
-	MaxConnsPerHost  = getEnvInt("MAX_CONNECTION_PER_HOST", "1")
+	IdleConnTimeout  = getEnv("IDLE_CONNECTION_TIMEOUT", "2s")
+	MaxConnsPerHost  = getEnvInt("MAX_CONNECTION_PER_HOST", "2")
 	MaxIdleConns     = getEnvInt("MAX_IDLE_CONNECTIONS", "10")
 )
 
