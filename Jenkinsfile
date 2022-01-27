@@ -11,7 +11,7 @@ pipeline {
     environment {
         ARTIFACTORY_URL='dsoe-public-docker-docker-local.bin.swisscom.com'
         IMAGE_NAME='prom-bb-licensce'
-        IMAGE_TAG='1.0'
+        IMAGE_TAG='1.0.1'
         SNYK_TOKEN=credentials('dsoe-snyk-test-sa-secrettext-token')
         ARTIFACTORY=credentials('saas-ops-sa-secret')
     }
