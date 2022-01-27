@@ -36,7 +36,7 @@ var (
 )
 
 func (c *Client) getAvailableLicenseCount(req *http.Request) ([]byte, error) {
-	u, err := url.Parse(*&LicenseEndpoint)
+	u, err := url.Parse(LicenseEndpoint)
 	if err != nil {
 		return nil, errors.New("Unable to parse Lincense URI endpoint")
 	}
