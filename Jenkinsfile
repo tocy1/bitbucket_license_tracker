@@ -26,7 +26,7 @@ pipeline {
         stage('Snyk Container') {
             steps {
                 echo "Scanning container image for vulnerabilities"
-                sh "snyk container  --severity-threshold=${SNYK_SEVERITY_THRESHOLD} ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "snyk container  test --severity-threshold=${SNYK_SEVERITY_THRESHOLD} ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
         stage('Push Image') {
