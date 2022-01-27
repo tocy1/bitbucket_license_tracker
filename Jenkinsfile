@@ -14,12 +14,19 @@ pipeline {
         IMAGE_TAG='1.0.1'
         SNYK_TOKEN=credentials('dsoe-snyk-test-sa-secrettext-token')
         ARTIFACTORY=credentials('saas-ops-sa-secret')
+        SNYK_SEVERITY_THRESHOLD='high'
     }
     stages {
         stage('Build Image') {
             steps {
               echo 'Building docker image'
               sh "docker build --no-cache -t ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG} ."
+            }
+        }
+        stage('Snyk Container') {
+            steps {
+                echo "Scanning container image for vulnerabilities"
+                sh "snyk container  --severity-threshold=${SNYK_SEVERITY_THRESHOLD} ${ARTIFACTORY_URL}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
         stage('Push Image') {
