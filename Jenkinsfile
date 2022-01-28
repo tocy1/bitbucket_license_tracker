@@ -9,7 +9,7 @@ pipeline {
             }
     options { buildDiscarder(logRotator(numToKeepStr: '6')) }
     environment {
-        ARTIFACTORY_URL='dsoe-docker-local.artifactory.swisscom.com'
+        ARTIFACTORY_URL='dos-docker.artifactory.swisscom.com'
         IMAGE_NAME='prom-bb-licensce'
         IMAGE_TAG='1.0.1'
         SNYK_TOKEN=credentials('dsoe-snyk-test-sa-secrettext-token')
