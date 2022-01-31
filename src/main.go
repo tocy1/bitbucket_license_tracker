@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -45,7 +44,6 @@ func (c *Client) getAvailableLicenseCount(req *http.Request) ([]byte, error) {
 	url := c.apiBaseURL.ResolveReference(u)
 	req.URL = url
 	req.Host = ""
-	fmt.Println(req.Host, req.Header, req.Proto, req.Method)
 	resp, err := c.HttpClient.Do(req)
 
 	if err != nil {
