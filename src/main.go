@@ -32,7 +32,13 @@ var (
 	IdleConnTimeout  = getEnv("IDLE_CONNECTION_TIMEOUT", "2s")
 	MaxConnsPerHost  = getEnvInt("MAX_CONNECTION_PER_HOST", "2")
 	MaxIdleConns     = getEnvInt("MAX_IDLE_CONNECTIONS", "10")
+	LogFile          = getEnv("LOGFILE", "/tmp/license.log")
 )
+
+func initializeLogger(file *os.File) *log.Logger {
+
+	return log.New(file, "", 0)
+}
 
 func (c *Client) getAvailableLicenseCount(req *http.Request) ([]byte, error) {
 	u, err := url.Parse(LicenseEndpoint)
@@ -58,6 +64,7 @@ func (c *Client) getAvailableLicenseCount(req *http.Request) ([]byte, error) {
 	return body, nil
 }
 func main() {
+
 	c, err := newClient()
 	if err != nil {
 		log.Fatalln(err)
@@ -75,9 +82,17 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	// Initiliaze file logger
+	f, err := os.OpenFile(LogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	defer f.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	logger := initializeLogger(f)
 	//Convert the body to type string
 	body := string(resp)
 	log.Printf(body)
+	logger.Printf(body)
 
 }
 
