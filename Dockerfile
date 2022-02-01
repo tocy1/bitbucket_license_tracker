@@ -3,5 +3,5 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 RUN go mod download
-RUN go build -o main ./src
-CMD ["./main"]
+RUN go build -o  bb-license-tracker ./src
+CMD ["./bb-license-tracker"]
